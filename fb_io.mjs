@@ -10,8 +10,7 @@
     
 const COL_C = 'white';	    // These two const are part of the coloured 	
 const COL_B = '#CD7F32';	//  console.log for functions scheme
-console.log('%c fb_io.mjs',
-            'color: blue; background-color: white;');
+console.log('%c fb_io.mjs', 'color: blue; background-color: white;');
 
 /**************************************************************/
 // Import all external constants & functions required
@@ -44,11 +43,24 @@ function fb_initialise() {
     const FB_GAMEDB  = getDatabase(FB_GAMEAPP);
     console.info(FB_GAMEDB);     
     console.log('%c fb_initialise(): ', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
-    
-    function fb_authenticate(){
+}
+function fb_authenticate(){
+    console.log('%c fb_authenticate(): ', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+    const AUTH = getAuth();
+    const PROVIDER = new GoogleAuthProvider();
 
-    }
-
+    signInWithPopup(AUTH, PROVIDER).then((result) => {
+        //✅ Code for a successful authentication goes here
+        console.log("Authentication successful");
+    })
+    .catch((error) => {
+        //❌ Code for an authentication error goes here
+        console.log("Authentication unsuccessful");
+        console.log(error)
+    });
+    PROVIDER.setCustomParameters({
+        prompt: 'select_account'
+    });
 }
 
 export { fb_initialise };
