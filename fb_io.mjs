@@ -19,8 +19,9 @@ console.log('%c fb_io.mjs', 'color: blue; background-color: white;');
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
@@ -48,7 +49,6 @@ function fb_authenticate(){
     console.log('%c fb_authenticate(): ', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
-
     signInWithPopup(AUTH, PROVIDER).then((result) => {
         //✅ Code for a successful authentication goes here
         console.log("Authentication successful");
@@ -56,15 +56,46 @@ function fb_authenticate(){
     .catch((error) => {
         //❌ Code for an authentication error goes here
         console.log("Authentication unsuccessful");
-        console.log(error)
+        console.log(error);
     });
     PROVIDER.setCustomParameters({
         prompt: 'select_account'
+    });
+
+}
+
+function onAuthStateChange(){
+    const AUTH = getAuth();
+    onAuthStateChanged(AUTH, (user) => {
+
+        if (user) {
+            console.log("user logged in");
+            console.log(user);
+        } else {
+            console.log("user logged out");
+        }
+    }, (error) => {
+        console.log("error happened");
+            console.log(error);
+    });
+}
+
+function Signout(){
+    const AUTH = getAuth();
+
+    signOut(AUTH).then(() => {
+        console.log("logout successful")
+    })
+    .catch((error) => {
+        console.log("logout error")
+        console.log(error)
     });
 }
 
 export { fb_initialise };
 export { fb_authenticate };
+export { onAuthStateChange };
+export { Signout };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/

@@ -20,6 +20,13 @@ import { fb_authenticate }
     from './fb_io.mjs';
     window.fb_authenticate   = fb_authenticate;
     
+import { onAuthStateChange }
+    from './fb_io.mjs';
+    window.onAuthStateChange  = onAuthStateChange;
+    
+import { Signout }
+    from './fb_io.mjs';
+    window.Signout  = Signout;
     
 /**************************************************************/
 // index.html main code
