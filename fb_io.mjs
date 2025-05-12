@@ -11,6 +11,7 @@
 const COL_C = 'white';	    // These two const are part of the coloured 	
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 console.log('%c fb_io.mjs', 'color: blue; background-color: white;');
+var FB_GAMEDB;
 
 /**************************************************************/
 // Import all external constants & functions required
@@ -22,6 +23,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstati
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
@@ -41,7 +43,7 @@ function fb_initialise() {
     };
 
     const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
-    const FB_GAMEDB  = getDatabase(FB_GAMEAPP);
+    FB_GAMEDB  = getDatabase(FB_GAMEAPP);
     console.info(FB_GAMEDB);     
     console.log('%c fb_initialise(): ', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 }
@@ -92,10 +94,43 @@ function Signout(){
     });
 }
 
+function fb_writeto() {
+
+    const dbReference= ref(FB_GAMEDB, "User/UserID");
+    var UserInformation = {highscore: 69, Name: "Max"};
+
+    set(dbReference, UserInformation).then(() => {
+        console.log("written the following indformation to the database");
+        console.log(UserInformation);
+    }).catch((error) => {
+        console.log("write error");
+        console.log(error);
+    });
+}
+
+function fb_read() {
+    const dbReference= ref(FB_GAMEDB,"User/UserID");
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            concole.log("successful read")
+            concole.log(fb_data)
+        } else {
+            concole.log("no record found")
+            concole.log(fb_data)
+        }
+    }).catch((error) => {
+        concole.log("Read all error")
+        concole.log(error)
+    });
+}
+
 export { fb_initialise };
 export { fb_authenticate };
 export { onAuthStateChange };
 export { Signout };
+export { fb_writeto };
+export { fb_read };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/
