@@ -35,6 +35,10 @@ import { fb_writeto }
 import { fb_read }
     from './fb_io.mjs';
     window.fb_read = fb_read;
+
+import { destroy }
+    from './fb_io.mjs';
+    window.destroy = destroy;
 /**************************************************************/
 // index.html main code
 /**************************************************************/

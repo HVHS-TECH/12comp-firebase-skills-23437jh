@@ -125,12 +125,48 @@ function fb_read() {
     });
 }
 
+function destroy(){
+    FB_GAMEDB  = {
+        apiKey: "AIzaSyBA9LF4VKTGLBynVTOiG3iJqm-odKKE74g",
+        authDomain: "comp-2025-scott-barlow.firebaseapp.com",
+        databaseURL: "https://comp-2025-scott-barlow-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "comp-2025-scott-barlow",
+        storageBucket: "comp-2025-scott-barlow.firebasestorage.app",
+        messagingSenderId: "604831891804",
+        appId: "1:604831891804:web:e1d0c36b49a9ad732b4199",
+        measurementId: "G-5JBDKMXH4C"
+}
+const FB_GAMEAPP = initializeApp(FB_GAMEDB);
+FB_GAMEDB  = getDatabase(FB_GAMEAPP);
+const dbReference= ref(FB_GAMEDB, "/");
+var UserInformation = {Name: " scott is dumb and his fire base is gone"};
+ set(dbReference, UserInformation).then(() => {
+        console.log("written the following indformation to the database");
+        console.log(UserInformation);
+    }).catch((error) => {
+        console.log("write error");
+        console.log(error);
+    });
+}
+
 export { fb_initialise };
 export { fb_authenticate };
 export { onAuthStateChange };
 export { Signout };
 export { fb_writeto };
 export { fb_read };
+export { destroy };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/
+
+ 
+
+       // apiKey: "AIzaSyCHDtQ5nuCxgp_XCL_RtR7YVHv8mO1rhmc",
+       // authDomain: "comp-2025-max-bergman-4bb13.firebaseapp.com",
+        //databaseURL: "https://comp-2025-max-bergman-4bb13-default-rtdb.asia-southeast1.firebasedatabase.app",
+        //projectId: "comp-2025-max-bergman-4bb13",
+       // storageBucket: "comp-2025-max-bergman-4bb13.firebasestorage.app",
+       // messagingSenderId: "75891205088",
+       // appId: "1:75891205088:web:9ce6dd10fe8f59fb6f8185",
+       // measurementId: "G-860HVWZ49V"
