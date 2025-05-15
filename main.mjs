@@ -39,6 +39,31 @@ import { fb_read }
 import { destroy }
     from './fb_io.mjs';
     window.destroy = destroy;
+
+import { readAll }
+    from './fb_io.mjs';
+    window.readAll = readAll;
+
+    /**************************************************************/
+    //import { 
+    //fb_initialise,
+   // fb_authenticate,
+    //onAuthStateChange,
+   // Signout,
+   // fb_writeto,
+   // fb_read,
+   // destroy,
+   // readAll
+//} from './fb_io.mjs';
+
+//window.fb_initialise = fb_initialise;
+//window.fb_authenticate = fb_authenticate;
+//window.onAuthStateChange = onAuthStateChange;
+//window.Signout = Signout;
+//window.fb_writeto = fb_writeto;
+//window.fb_read = fb_read;
+//window.destroy = destroy;
+//window.readAll = readAll;
 /**************************************************************/
 // index.html main code
 /**************************************************************/

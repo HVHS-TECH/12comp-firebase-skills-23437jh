@@ -17,13 +17,25 @@ var FB_GAMEDB;
 // Import all external constants & functions required
 /**************************************************************/
 // Import all the methods you want to call from the firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-import { get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { 
+    initializeApp 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+import { 
+    getDatabase, 
+    ref, 
+    set, 
+    get, 
+    update 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+import { 
+    getAuth, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    onAuthStateChanged, 
+    signOut 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
@@ -113,15 +125,15 @@ function fb_read() {
     get(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
-            concole.log("successful read")
-            concole.log(fb_data)
+            console.log("successful read")
+            console.log(fb_data)
         } else {
-            concole.log("no record found")
-            concole.log(fb_data)
+            console.log("no record found")
+            cosole.log(fb_data)
         }
     }).catch((error) => {
-        concole.log("Read all error")
-        concole.log(error)
+        console.log("Read all error")
+        console.log(error)
     });
 }
 
@@ -149,12 +161,30 @@ var UserInformation = {Name: " scott is dumb and his fire base is gone"};
     });
 }
 
+function readAll(){
+const dbReference= ref(FB_GAMEDB, "User/UserID");
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+           console.log("Read all successfully")
+        } else {
+            console.log("no record read")
+        }
+    }).catch((error) => {
+        console.log("Read all error")
+         console.log(error)
+    });
+}
+
+
+
 export { fb_initialise };
 export { fb_authenticate };
 export { onAuthStateChange };
 export { Signout };
 export { fb_writeto };
 export { fb_read };
+export { readAll };
 export { destroy };
 /**************************************************************/
 // END OF CODE
