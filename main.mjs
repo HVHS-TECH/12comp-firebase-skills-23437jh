@@ -44,6 +44,10 @@ import { readAll }
     from './fb_io.mjs';
     window.readAll = readAll;
 
+import { fb_update }
+    from './fb_io.mjs';
+    window.fb_update = fb_update;
+
     /**************************************************************/
     //import { 
     //fb_initialise,
