@@ -48,6 +48,10 @@ import { fb_update }
     from './fb_io.mjs';
     window.fb_update = fb_update;
 
+import { sortedRead }
+    from './fb_io.mjs';
+    window.sortedRead = sortedRead;
+
     /**************************************************************/
     //import { 
     //fb_initialise,

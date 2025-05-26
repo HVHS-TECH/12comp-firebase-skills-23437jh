@@ -12,6 +12,7 @@ const COL_C = 'white';	    // These two const are part of the coloured
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 console.log('%c fb_io.mjs', 'color: blue; background-color: white;');
 var FB_GAMEDB;
+var fb_uid
 
 /**************************************************************/
 // Import all external constants & functions required
@@ -67,7 +68,9 @@ function fb_authenticate(){
     const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
     signInWithPopup(AUTH, PROVIDER).then((result) => {
-        //✅ Code for a successful authentication goes here
+       fb_uid = result.user.uid;
+        console.log(result.user.uid);
+        console.log(result);
         console.log("Authentication successful");
     })
     .catch((error) => {
@@ -111,8 +114,8 @@ function Signout(){
 
 function fb_writeto() {
 
-    const dbReference= ref(FB_GAMEDB, "User/UserID");
-    var UserInformation = {highscore: 69, Name: "Max"};
+    const dbReference= ref(FB_GAMEDB, ("User/"+ fb_uid));
+    var UserInformation = {highScore: 69, Name: "Max"};
 
     set(dbReference, UserInformation).then(() => {
         console.log("written the following indformation to the database");
@@ -124,7 +127,7 @@ function fb_writeto() {
 }
 
 function fb_read() {
-    const dbReference= ref(FB_GAMEDB,"User/UserID");
+    const dbReference= ref(FB_GAMEDB,("User/"+ fb_uid));
     get(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -165,7 +168,7 @@ var UserInformation = {Name: " scott is dumb and his fire base is gone"};
 }
 
 function readAll(){
-const dbReference= ref(FB_GAMEDB, "User/UserID");
+const dbReference= ref(FB_GAMEDB, ("User/"+ fb_uid));
     get(dbReference).then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -180,8 +183,8 @@ const dbReference= ref(FB_GAMEDB, "User/UserID");
 }
 // function to update database
 function fb_update(){
-const dbReference= ref(FB_GAMEDB, "User/UserID");
-var UserInformation = {highscore: 89, Name: "Max"};
+const dbReference= ref(FB_GAMEDB, ("User/"+ fb_uid));
+var UserInformation = {highScore: 89, Name: "Max"};
     update(dbReference, UserInformation).then(() => {
         console.log(UserInformation);
         console.log("update successful");
@@ -191,9 +194,9 @@ var UserInformation = {highscore: 89, Name: "Max"};
     });
 }
 
-function SortedRead(){
-var sortKey = "HighScore";
-const dbReference= query(ref(FB_GAMEDB, "User/UserID"), orderByChild(sortkey), limitToFirst(2));
+function sortedRead(){
+var sortKey = "highScore";
+const dbReference= query(ref(FB_GAMEDB, ("User/"+ fb_uid)), orderByChild(sortKey), limitToFirst(10));
 get(dbReference).then((snapshot) => {
      var fb_data = snapshot.val();
     if (fb_data != null) {
@@ -219,7 +222,7 @@ export { fb_read };
 export { readAll };
 export { destroy };
 export { fb_update };
-export { SortedRead };
+export { sortedRead };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/
