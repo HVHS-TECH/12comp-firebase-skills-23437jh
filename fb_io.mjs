@@ -212,7 +212,6 @@ get(dbReference).then((snapshot) => {
     });
 }
 
-
 export { fb_initialise };
 export { fb_authenticate };
 export { onAuthStateChange };
@@ -226,8 +225,6 @@ export { sortedRead };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/
-
- 
 
        // apiKey: "AIzaSyCHDtQ5nuCxgp_XCL_RtR7YVHv8mO1rhmc",
        // authDomain: "comp-2025-max-bergman-4bb13.firebaseapp.com",
