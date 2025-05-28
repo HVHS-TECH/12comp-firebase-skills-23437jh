@@ -30,7 +30,8 @@ import {
     update,
     query,
     orderByChild,
-    limitToFirst
+    limitToFirst,
+    onValue
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 import { 
@@ -166,7 +167,7 @@ var UserInformation = {Name: " scott is dumb and his fire base is gone"};
         console.log(error);
     });
 }
-
+// function read all
 function readAll(){
 const dbReference= ref(FB_GAMEDB, ("User/"+ fb_uid));
     get(dbReference).then((snapshot) => {
@@ -193,7 +194,7 @@ var UserInformation = {highScore: 89, Name: "Max"};
     console.log(error);
     });
 }
-
+// sorted read function
 function sortedRead(){
 var sortKey = "highScore";
 const dbReference= query(ref(FB_GAMEDB, ("User/"+ fb_uid)), orderByChild(sortKey), limitToFirst(10));
@@ -212,6 +213,35 @@ get(dbReference).then((snapshot) => {
     });
 }
 
+function onValueRead() {
+    const dbReference = ref(FB_GAMEDB, ("User/" + fb_uid));
+    onValue(dbReference, (snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            console.log("onValue read successful");
+            console.log("woizogoi" + fb_data);
+        } else {
+            console.log("no record found");
+            console.log(fb_data);
+        }
+    }, (error) => {
+        console.log("onValue read error");
+        console.log(error);
+    });
+
+    //const dbReference = ref(what-DB, where-to-monitor-&-read-from);
+    //onValue(dbReference, (snapshot) => {
+        //var fb_data = snapshot.val();
+        //if (fb_data != null) {
+           // ✅ Code for a successful read goes here
+       // } else {
+           // ✅ Code for no record found goes here
+
+       // }
+
+   // });
+}
+
 export { fb_initialise };
 export { fb_authenticate };
 export { onAuthStateChange };
@@ -222,6 +252,7 @@ export { readAll };
 export { destroy };
 export { fb_update };
 export { sortedRead };
+export { onValueRead };
 /**************************************************************/
 // END OF CODE
 /**************************************************************/

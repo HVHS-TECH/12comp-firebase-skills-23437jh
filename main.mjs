@@ -52,6 +52,10 @@ import { sortedRead }
     from './fb_io.mjs';
     window.sortedRead = sortedRead;
 
+import { onValueRead }
+    from './fb_io.mjs';
+    window.onValueRead = onValueRead;
+
     /**************************************************************/
     //import { 
     //fb_initialise,
