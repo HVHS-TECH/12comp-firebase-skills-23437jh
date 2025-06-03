@@ -195,17 +195,17 @@ var UserInformation = {highScore: 89, Name: "Max"};
     });
 }
 // sorted read function
-function sortedRead(){
-var sortKey = "highScore";
-const dbReference= query(ref(FB_GAMEDB, ("User/"+ fb_uid)), orderByChild(sortKey), limitToFirst(10));
-get(dbReference).then((snapshot) => {
-     var fb_data = snapshot.val();
-    if (fb_data != null) {
-        console.log("Sorted read successful");
-        console.log(fb_data);
-     } else {
-        console.log("no record found");
-        console.log(fb_data);
+function sortedRead() {
+    var sortKey = "highScore";
+    const dbReference= query(ref(FB_GAMEDB, ("User/"+ fb_uid)), orderByChild(sortKey), limitToFirst(10));
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            console.log("Sorted read successful");
+            console.log(fb_data);
+        } else {
+            console.log("no record found");
+            console.log(fb_data);
         }
     }).catch((error) => {
         console.log("Sorted read error");
@@ -219,7 +219,7 @@ function onValueRead() {
         var fb_data = snapshot.val();
         if (fb_data != null) {
             console.log("onValue read successful");
-            console.log("woizogoi" + fb_data);
+            console.log("" + fb_data);
         } else {
             console.log("no record found");
             console.log(fb_data);
@@ -228,7 +228,6 @@ function onValueRead() {
         console.log("onValue read error");
         console.log(error);
     });
-
     //const dbReference = ref(what-DB, where-to-monitor-&-read-from);
     //onValue(dbReference, (snapshot) => {
         //var fb_data = snapshot.val();
@@ -236,9 +235,7 @@ function onValueRead() {
            // ✅ Code for a successful read goes here
        // } else {
            // ✅ Code for no record found goes here
-
        // }
-
    // });
 }
 
